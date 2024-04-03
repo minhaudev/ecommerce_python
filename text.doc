@@ -1,0 +1,4 @@
+sm={12}: Đối với màn hình nhỏ (kích thước nhỏ hơn hoặc bằng sm, tức là kích thước điện thoại), cột này sẽ chiếm toàn bộ 12 cột của lưới.
+md={6}: Đối với màn hình vừa (kích thước từ md, tức là kích thước máy tính bảng), cột này sẽ chiếm 6 cột trong tổng số 12 cột của lưới.
+lg={4}: Đối với màn hình lớn (kích thước từ lg, tức là kích thước laptop), cột này sẽ chiếm 4 cột trong tổng số 12 cột của lưới.
+xl={3}: Đối với màn hình rất lớn (kích thước từ xl, tức là kích thước lớn hơn laptop), cột này sẽ chiếm 3 cột trong tổng số 12 cột của lưới.
