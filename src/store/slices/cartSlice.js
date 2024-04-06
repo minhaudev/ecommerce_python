@@ -10,7 +10,7 @@ export const cartItems = createSlice({
   reducers: {
     cartAddItem: (state, action) => {
       const { id, qty, pDetails } = action.payload;
-      console.log("pdetails", pDetails);
+
       const { _id, name, image, price, countInStock } = pDetails;
 
       const existItemIndex = state.cartItems.findIndex(
