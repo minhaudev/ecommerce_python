@@ -3,6 +3,7 @@ import { Row, Col } from "react-bootstrap";
 // import products from "../products";
 import Product from "../components/Product";
 import { useEffect, useState } from "react";
+import { setProduct } from "../store/slices/productSlice";
 import axios from "axios";
 function HomeScreen() {
   const [products, setProducts] = useState([]);
@@ -10,6 +11,8 @@ function HomeScreen() {
   useEffect(() => {
     async function fetchProducts() {
       const { data } = await axios.get("http://127.0.0.1:8000/api/products/");
+      setProduct(data);
+      console.log("data", data);
       setProducts(data);
     }
     fetchProducts();
