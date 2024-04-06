@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "corsheaders",
     'rest_framework',
     "base.apps.BaseConfig",
     "cloudinary",
     "upload",
+    "corsheaders"
 
 ]
 
@@ -54,8 +54,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-        'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware', 
 ]
+
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -139,4 +141,8 @@ MEDIA_ROOT = "static/images"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS là một cơ chế cho phép các trang web yêu cầu dữ liệu từ một nguồn khác ngoài trang web mà nó được tải lên.
-CORS_ALLOW_ALL_ORIGINS =True
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+
+
