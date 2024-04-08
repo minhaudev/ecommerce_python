@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProduct } from "../store/slices/productSlice";
 import Product from "../components/Product";
 import Loading from "../components/Loading";
-import Massage from "../components/Massage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 function HomeScreen() {

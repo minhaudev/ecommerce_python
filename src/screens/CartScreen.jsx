@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { cartAddItem, cartRemoveItem } from "../store/slices/cartSlice";
 import { useNavigate } from "react-router-dom";
-import Massage from "../components/Massage";
+import Massage from "../components/Message";
 import {
   Row,
   Col,
