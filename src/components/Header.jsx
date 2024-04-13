@@ -7,6 +7,7 @@ import { logout } from "../store/slices/userSlice";
 function Header() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.users.userInfo);
+  const user = useSelector((state) => state.users.userDetails);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -36,7 +37,11 @@ function Header() {
                   </Nav.Link>
                 </LinkContainer>
               ) : (
-                <NavDropdown title={userInfo.name}>
+                <NavDropdown
+                  title={
+                    Object.keys(user).length !== 0 ? user.name : userInfo.name
+                  }
+                >
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>

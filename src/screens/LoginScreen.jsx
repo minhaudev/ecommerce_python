@@ -21,7 +21,7 @@ const LoginScreen = () => {
     try {
       setLoading(true);
       const res = await serviceUser.loginUser(email, password);
-
+      console.log("res 123112", res);
       if (res) {
         dispatch(setUser(res));
         navigate("/");

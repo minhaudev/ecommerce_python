@@ -24,7 +24,7 @@ function ProductScreen() {
   const [isLoading, setIsLoading] = useState(false);
   const [pDetails, setPDetails] = useState({});
   const product = useSelector((state) => state.products.productDetails);
-  console.log("pDetails", pDetails);
+
   const fetchProductDetails = async (productId) => {
     try {
       setIsLoading(true);

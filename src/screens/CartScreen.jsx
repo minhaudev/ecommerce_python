@@ -21,10 +21,15 @@ function CartScreen() {
   const removeFromCartHandler = (id) => {
     dispatch(cartRemoveItem(id));
   };
-  const checkoutHandler = () => {
-    console.log("1223");
+  const userInfo = useSelector((state) => state.users.userInfo);
+  useEffect(() => {
+    if (userInfo == 0) {
+      navigate("/login?redirect=shipping");
+    }
+  }, [userInfo, navigate]);
 
-    navigate("/login?redirect=shipping");
+  const checkoutHandler = () => {
+    navigate("/shipping");
   };
   return (
     <Row>

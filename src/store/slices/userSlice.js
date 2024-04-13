@@ -13,14 +13,14 @@ export const userSlice = createSlice({
     },
     logout: (state, action) => {
       state.userInfo = [];
-      // localStorage.removeItem("persist:root");
+      state.userDetails = {};
       localStorage.removeItem("users");
     },
-    // signUp: (state, action) => {
-    //   state.userInfo = action.payload;
-    // },
+    getDetailsUser: (state, action) => {
+      state.userDetails = action.payload;
+    },
   },
 });
 
-export const { setUser, logout } = userSlice.actions;
+export const { setUser, logout, getDetailsUser } = userSlice.actions;
 export default userSlice.reducer;

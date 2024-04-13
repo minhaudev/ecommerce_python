@@ -3,6 +3,7 @@ import storage from "redux-persist/lib/storage";
 import productSlice from "./slices/productSlice";
 import cartSlice from "./slices/cartSlice";
 import userSlice from "./slices/userSlice";
+import orderSlice from "./slices/orderSlice";
 import {
   persistStore,
   persistReducer,
@@ -18,12 +19,14 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  // blacklist: ["orderPay", "orderDelivered"],
 };
 
 const rootReducer = combineReducers({
   products: productSlice,
   cart: cartSlice,
   users: userSlice,
+  orders: orderSlice,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
