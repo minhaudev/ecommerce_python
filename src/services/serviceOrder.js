@@ -87,3 +87,19 @@ export const updateOrderDelivered = async (id, token) => {
     throw error.response.data;
   }
 };
+export const getMyOrders = async (token) => {
+  console.log("service", token);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const res = await axios.get(`${URL_BACKEND}orders/myorders/`, config);
+    return res.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
