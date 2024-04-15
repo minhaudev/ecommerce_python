@@ -75,3 +75,69 @@ export const updateUser = async (name, email, password, token) => {
     throw error.response.data;
   }
 };
+
+export const getUsers = async (token) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const res = await axios.get(`${URL_BACKEND}users/`, config);
+    return res.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+export const deleteUser = async (id, token) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const res = await axios.delete(`${URL_BACKEND}users/delete/${id}`, config);
+    return res.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const getUserById = async (id, token) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const res = await axios.get(`${URL_BACKEND}users/${id}`, config);
+    return res.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+export const updateUserById = async (id, name, email, isAdmin, token) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  try {
+    const res = await axios.put(
+      `${URL_BACKEND}users/update/${id}/`,
+      {
+        name: name,
+        email: email,
+        isAdmin: isAdmin,
+      },
+      config
+    );
+    return res.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
