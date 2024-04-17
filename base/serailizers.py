@@ -36,6 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Product 
         fields = "__all__"
+        read_only_fields = ['_id']
 class ShippingAddressSerializer(serializers.ModelSerializer):
     class Meta: 
         model = ShippingAddress 
