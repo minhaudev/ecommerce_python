@@ -86,6 +86,7 @@ function ProfileScreen() {
   const orders = async (token) => {
     const res = await serviceOrder.getMyOrders(token);
     setDataOder(res);
+    console.log(res);
   };
   useEffect(() => {
     orders(userInfo.token);
@@ -155,8 +156,8 @@ function ProfileScreen() {
           </thead>
           <tbody>
             {dataOrder?.map((order) => (
-              <tr>
-                <td>{moment(order.createdAt).format("YYYY-MM-DD")}</td>
+              <tr key={order._id}>
+                <td>{moment(order.paidAt).format("YYYY-MM-DD")}</td>
 
                 <td>{order.paymentMethod}</td>
 

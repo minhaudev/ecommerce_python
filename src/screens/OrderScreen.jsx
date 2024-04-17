@@ -11,19 +11,28 @@ import {
 } from "react-bootstrap";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetailsOrder, updatePay } from "../store/slices/orderSlice";
+import {
+  getDetailsOrder,
+  updateOrderDelivered,
+} from "../store/slices/orderSlice";
 import * as serviceOrder from "../services/serviceOrder";
 import Message from "../components/Message";
 import Loading from "../components/Loading";
 import { PayPalButton } from "react-paypal-button-v2";
+import { createOrder } from "../store/slices/orderSlice";
+import { removeItemsOrdered } from "../store/slices/cartSlice";
 function OrderScreen() {
-  const [isDelivered, setIsDelivered] = useState(false);
-  const [isPaid, setIsPaid] = useState(false);
+  //
+  const handlerPlaceOrder = (e) => {
+    e.preventDefault();
+  };
   const dispatch = useDispatch();
   const { id } = useParams();
+  const [isPaid, setIsPaid] = useState(false);
+  const [isDelivered, setIsDelivered] = useState(false);
   const userInfo = useSelector((state) => state.users.userInfo);
   const orderDetails = useSelector((state) => state.orders.detailsOrder);
-  console.log("orderDetails money", orderDetails);
+  console.log("orderDetails", orderDetails);
   const {
     user = {},
     shippingAddress = {},
@@ -31,19 +40,15 @@ function OrderScreen() {
     paymentMethod = "",
   } = orderDetails || {};
   const [sdkReady, setSdkReady] = useState(false);
-  const orderPay = useSelector((state) => state.orders.orderPay);
-  console.log(orderPay);
+
   const handelOrderCash = async () => {
-    const res = await serviceOrder.updateOrderDelivered(id, userInfo.token);
-    if (res) {
-      setIsDelivered(true);
-    }
+    await serviceOrder.updateOrderDelivered(id, userInfo.token);
+    setIsDelivered(true);
   };
   const handelOrderPaypal = async () => {
-    const res = await serviceOrder.updateOrderPay(id, userInfo.token);
-    if (res) {
-      setIsPaid(true);
-    }
+    await serviceOrder.updateOrderPay(id, userInfo.token);
+    setIsPaid(true);
+    dispatch(removeItemsOrdered());
   };
   const addPayPalScript = () => {
     const script = document.createElement("script");
@@ -86,12 +91,6 @@ function OrderScreen() {
         .reduce((acc, item) => (acc += item.price * item.qty), 0)
         .toFixed(2)
     : 0;
-
-  const successPaymentHandler = (paymentResult) => {
-    setIsPaid(true);
-    console.log("Payment result:", paymentResult);
-  };
-
   return (
     <Row>
       <Col md={8}>
@@ -112,7 +111,7 @@ function OrderScreen() {
               <strong>Shipping:</strong>
               {shippingAddress.address}
             </p>
-            {isDelivered ? (
+            {orderDetails?.isDelivered || isDelivered ? (
               <Message variant="success">Delivered On</Message>
             ) : (
               <Message variant="warning">Not Delivered</Message>
@@ -123,7 +122,7 @@ function OrderScreen() {
             <p>
               <strong>Method:</strong> Payment In {paymentMethod}
             </p>
-            {isPaid ? (
+            {orderDetails.issPaid || isPaid ? (
               <Message variant="success">Paid On</Message>
             ) : (
               <Message variant="warning">Not Paid</Message>
@@ -198,7 +197,7 @@ function OrderScreen() {
                   <div>
                     <PayPalButton
                       amount={orderDetails.totalPrice}
-                      onSuccess={successPaymentHandler}
+                      // onSuccess={successPaymentHandler}
                     />
                     <Button
                       onClick={handelOrderPaypal}

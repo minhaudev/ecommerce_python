@@ -59,7 +59,6 @@ function PlaceOrderScreen() {
         if (res) {
           dispatch(createOrder(res));
           navigate(`/order/${res._id}`);
-          dispatch(removeItemsOrdered());
         }
       } catch (error) {
         console.log("error", error);
@@ -76,7 +75,7 @@ function PlaceOrderScreen() {
       user.token
     );
   };
-  useEffect(() => {}, []);
+
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />

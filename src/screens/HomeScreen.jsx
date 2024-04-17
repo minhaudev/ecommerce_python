@@ -6,28 +6,33 @@ import { setProduct } from "../store/slices/productSlice";
 import Product from "../components/Product";
 import Loading from "../components/Loading";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
+import ProductCarousel from "../components/ProductCarousel";
 function HomeScreen() {
+  const location = useLocation();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const [products, setProducts] = useState([]);
-  const data = useSelector((state) => state.products.products);
+  let keyword = location.search;
+  const dataProduct = useSelector((state) => state.products.products);
   useEffect(() => {
-    async function fetchProducts() {
-      const { data } = await axios.get("http://127.0.0.1:8000/api/products/");
-      setProducts(data);
-    }
-    fetchProducts();
-  }, []);
-
+    fetchProducts(keyword);
+  }, [keyword]);
+  async function fetchProducts(keyword) {
+    setIsLoading(true);
+    const res = await serviceProduct.getAllProduct(keyword);
+    setIsLoading(false);
+    dispatch(setProduct(res));
+  }
   return (
     <div>
+      {!keyword && <ProductCarousel />}
+
       <h1>latest Products</h1>
       {isLoading ? (
         <Loading />
       ) : (
         <Row>
-          {products?.map((product) => {
+          {dataProduct?.map((product) => {
             return (
               <Col
                 key={product?._id}

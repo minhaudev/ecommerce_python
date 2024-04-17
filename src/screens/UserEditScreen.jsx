@@ -36,7 +36,7 @@ function UserEditScreen() {
     }
   };
   useEffect(() => {
-    if (userUpdate._id == id) {
+    if (userUpdate?._id == id) {
       setName(userUpdate.name);
       setEmail(userUpdate.email);
       setIsAdmin(userUpdate.isAdmin);

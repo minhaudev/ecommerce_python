@@ -57,7 +57,7 @@ function userListScreen() {
             </tr>
           </thead>
           <tbody>
-            {userList.map((user) => (
+            {userList?.map((user) => (
               <tr key={user._id}>
                 <td>{user._id}</td>
                 <td>{user.name}</td>

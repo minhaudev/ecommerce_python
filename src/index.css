@@ -5,3 +5,41 @@ h1 {
   font-size: 1.8;
   padding: 1rem 0;
 }
+.rating span {
+  margin: 0.1rem;
+}
+/* carousel */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item-active {
+  display: flex;
+}
+.carousel-cation {
+  position: absolute;
+  top: 0px;
+}
+.carousel-h4 {
+  top: 10px;
+  width: 60%;
+  color: #fff;
+  position: absolute;
+  right: 20%;
+  text-align: center;
+}
+.carousel img {
+  display: block;
+  height: 300px;
+  padding: 30px;
+  margin: 40px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel a {
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .carousel-cation h2 {
+    font-size: 2.5vw;
+  }
+}
